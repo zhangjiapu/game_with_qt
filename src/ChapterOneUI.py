@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class ChapterOneMainUI(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, nextWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(784, 754)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -29,7 +29,7 @@ class ChapterOneMainUI(object):
         self.gridOne.addWidget(self.btn11, 2, 0, 1, 1)
         self.btn6 = QtWidgets.QPushButton(self.gridLayoutWidget)
         self.btn6.setObjectName("btn6")
-        self.btn6.clicked.connect(lambda: self.change_btn_color(self.btn16))
+        self.btn6.clicked.connect(lambda: self.change_btn_color(self.btn6))
         self.gridOne.addWidget(self.btn6, 1, 0, 1, 1)
         self.btn5 = QtWidgets.QPushButton(self.gridLayoutWidget)
         self.btn5.setObjectName("btn5")
@@ -251,7 +251,7 @@ class ChapterOneMainUI(object):
         self.btnCheck = QtWidgets.QPushButton(self.centralwidget)
         self.btnCheck.setGeometry(QtCore.QRect(260, 670, 93, 28))
         self.btnCheck.setObjectName("btnCheck")
-        self.btnCheck.clicked.connect(lambda: self.check_pwd(MainWindow))
+        self.btnCheck.clicked.connect(lambda: self.check_pwd(MainWindow, nextWindow))
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.btnReset = QtWidgets.QPushButton(self.centralwidget)
@@ -270,11 +270,10 @@ class ChapterOneMainUI(object):
 
         self.retranslateUi(MainWindow)
         self.init_btn_color()
-        self.init_flag()
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def init_flag(self):
-        # 第一个表的答案：53142
+        # 第一个表的答案：51324
         self.grid1_btn5 = False
         self.grid1_btn8 = False
         self.grid1_btn11 = False
@@ -347,9 +346,11 @@ class ChapterOneMainUI(object):
         self.btnCheck.setText(_translate("MainWindow", "check"))
         self.btnReset.setText(_translate("MainWindow", "reset"))
 
-    def check_pwd(self, mainWindow):
+    def check_pwd(self, mainWindow, nextWindow):
+        # 如果成功，则关闭当前窗口，开启下一个窗口
         if self.check_grid1() is True and self.check_grid2() is True:
             mainWindow.close()
+            nextWindow.show()
         else:
             QtWidgets.QMessageBox.about(mainWindow, "提示信息", "不对哦，再试试~")
 
@@ -357,7 +358,7 @@ class ChapterOneMainUI(object):
         if self.grid2_btn27 is True \
                 and self.grid2_btn33 is True \
                 and self.grid2_btn40 is True \
-                and self.grid2_btn44 is True\
+                and self.grid2_btn44 is True \
                 and self.grid2_btn46 is True:
             return True
         else:
@@ -365,10 +366,10 @@ class ChapterOneMainUI(object):
 
     def check_grid1(self):
         if self.grid1_btn5 is True \
-                and self.grid1_btn8 is True\
-                and self.grid1_btn11 is True \
-                and self.grid1_btn19 is True \
-                and self.grid1_btn22 is True:
+                and self.grid1_btn6 is True \
+                and self.grid1_btn13 is True \
+                and self.grid1_btn17 is True \
+                and self.grid1_btn24 is True:
             return True
         else:
             return False
@@ -381,12 +382,14 @@ class ChapterOneMainUI(object):
         self.change_btn_color(self.btn19)
         self.change_btn_color(self.btn21)
 
-        # 第二个初始值是：53142
+        # 第二个初始值是：51324
         self.change_btn_color(self.btn30)
-        self.change_btn_color(self.btn33)
-        self.change_btn_color(self.btn36)
-        self.change_btn_color(self.btn44)
-        self.change_btn_color(self.btn47)
+        self.change_btn_color(self.btn31)
+        self.change_btn_color(self.btn38)
+        self.change_btn_color(self.btn42)
+        self.change_btn_color(self.btn49)
+
+        self.init_flag()
 
     def change_btn_color(self, btn):
         if btn.objectName() in ["btn1", "btn2", "btn3", "btn4", "btn5"]:
@@ -408,10 +411,10 @@ class ChapterOneMainUI(object):
             self.btn9.setStyleSheet("background-color:")
             self.btn10.setStyleSheet("background-color:")
             btn.setStyleSheet("background-color:pink")
-            if btn.objectName() == "btn8":
-                self.grid1_btn8 = True
+            if btn.objectName() == "btn6":
+                self.grid1_btn6 = True
             else:
-                self.grid1_btn8 = False
+                self.grid1_btn6 = False
 
         elif btn.objectName() in ["btn11", "btn12", "btn13", "btn14", "btn15"]:
             self.btn11.setStyleSheet("background-color:")
@@ -420,10 +423,10 @@ class ChapterOneMainUI(object):
             self.btn14.setStyleSheet("background-color:")
             self.btn15.setStyleSheet("background-color:")
             btn.setStyleSheet("background-color:pink")
-            if btn.objectName() == "btn11":
-                self.grid1_btn11 = True
+            if btn.objectName() == "btn13":
+                self.grid1_btn13 = True
             else:
-                self.grid1_btn11 = False
+                self.grid1_btn13 = False
 
         elif btn.objectName() in ["btn16", "btn17", "btn18", "btn19", "btn20"]:
             self.btn16.setStyleSheet("background-color:")
@@ -432,10 +435,10 @@ class ChapterOneMainUI(object):
             self.btn19.setStyleSheet("background-color:")
             self.btn20.setStyleSheet("background-color:")
             btn.setStyleSheet("background-color:pink")
-            if btn.objectName() == "btn19":
-                self.grid1_btn19 = True
+            if btn.objectName() == "btn17":
+                self.grid1_btn17 = True
             else:
-                self.grid1_btn19 = False
+                self.grid1_btn17 = False
 
         elif btn.objectName() in ["btn21", "btn22", "btn23", "btn24", "btn25"]:
             self.btn21.setStyleSheet("background-color:")
@@ -444,10 +447,10 @@ class ChapterOneMainUI(object):
             self.btn24.setStyleSheet("background-color:")
             self.btn25.setStyleSheet("background-color:")
             btn.setStyleSheet("background-color:pink")
-            if btn.objectName() == "btn22":
-                self.grid1_btn22 = True
+            if btn.objectName() == "btn24":
+                self.grid1_btn24 = True
             else:
-                self.grid1_btn22 = False
+                self.grid1_btn24 = False
 
         elif btn.objectName() in ["btn26", "btn27", "btn28", "btn29", "btn30"]:
             self.btn26.setStyleSheet("background-color:")

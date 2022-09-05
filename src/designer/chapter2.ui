@@ -14,38 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="formLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>470</y>
-      <width>252</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="longitudeLabel">
-       <property name="text">
-        <string>longitude</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="longitudeLineEdit"/>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="latitudeLineEdit"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="latitudeLabel">
-       <property name="text">
-        <string>latitude</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
@@ -233,7 +201,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>找到这个地方，然后输入它的坐标</string>
+     <string>输入地名，即可通关</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_22">
@@ -247,6 +215,16 @@
     </property>
     <property name="text">
      <string>PS:解密后，在地图上查看下这个位置，有惊喜~</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>490</y>
+      <width>251</width>
+      <height>21</height>
+     </rect>
     </property>
    </widget>
   </widget>
