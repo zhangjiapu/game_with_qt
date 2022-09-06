@@ -9,10 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import pygame
+import CommonUtil
 
 
 class ChapterTwoMainUI(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow, nextWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 630)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -20,7 +22,7 @@ class ChapterTwoMainUI(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(340, 530, 93, 28))
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(lambda : self.check_pwd(MainWindow))
+        self.pushButton.clicked.connect(lambda: self.check_pwd(MainWindow, nextWindow))
         self.gridLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(240, 150, 291, 301))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
@@ -111,7 +113,6 @@ class ChapterTwoMainUI(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "check"))
         self.label_6.setText(_translate("MainWindow", "━．"))
         self.label_3.setText(_translate("MainWindow", "．━．．"))
@@ -136,9 +137,15 @@ class ChapterTwoMainUI(object):
         self.label_21.setText(_translate("MainWindow", "输入地名，即可通关"))
         self.label_22.setText(_translate("MainWindow", "PS:解密后，在地图上查看下这个位置，有惊喜~"))
 
-    def check_pwd(self,chapterTwoWindow):
+    def check_pwd(self, chapterTwoWindow, nextWindow):
         content = self.lineEdit.text()
-        if content == "Galesnjak":
+        if content is None or len(content) == 0:
+            QtWidgets.QMessageBox.about(chapterTwoWindow, "提示", "答案是空的~")
+        elif content.upper() == "Galesnjak".upper():
             chapterTwoWindow.close()
+            pygame.mixer.init()
+            pygame.mixer.music.load(CommonUtil.resource_path("./resource/music/day1.mp3"))
+            pygame.mixer.music.play()
+            nextWindow.show()
         else:
-            QtWidgets.QMessageBox.about(self, "chapter2", "不对~")
+            QtWidgets.QMessageBox.about(chapterTwoWindow, "chapter2", "不对~")
